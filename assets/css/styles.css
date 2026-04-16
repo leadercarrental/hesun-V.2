@@ -786,27 +786,27 @@ p { margin-bottom: 1rem; }
 .contact-list {
   list-style: none;
   margin-bottom: 2.5rem;
-  text-align: left;
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
 }
 
 .contact-list li {
   display: flex;
   align-items: center;
+  background: #f8f6f0;
+  border: 1px solid rgba(212, 168, 82, 0.25);
+  border-radius: 8px;
+  padding: 14px 20px;
   gap: 0;
-  padding: 14px 0;
-  border-bottom: 1px solid #f0f0f0;
-}
-
-.contact-list li:last-child {
-  border-bottom: none;
 }
 
 .ci-label {
   display: inline-flex;
   align-items: center;
   justify-content: center;
-  min-width: 80px;
-  padding: 4px 10px;
+  min-width: 84px;
+  padding: 5px 12px;
   background: #D4A852;
   color: #1a1a1a;
   font-size: 0.75rem;
@@ -814,7 +814,7 @@ p { margin-bottom: 1rem; }
   letter-spacing: 0.08em;
   text-transform: uppercase;
   border-radius: 4px;
-  margin-right: 16px;
+  margin-right: 18px;
   flex-shrink: 0;
 }
 
@@ -834,7 +834,7 @@ p { margin-bottom: 1rem; }
 /* Social Buttons */
 .social-row {
   display: flex;
-  gap: 16px;
+  gap: 20px;
   justify-content: center;
   margin-top: 0.5rem;
 }
@@ -843,8 +843,8 @@ p { margin-bottom: 1rem; }
   display: inline-flex;
   align-items: center;
   justify-content: center;
-  width: 52px;
-  height: 52px;
+  width: 64px;
+  height: 64px;
   border-radius: 50%;
   background: #D4A852;
   color: #1a1a1a;
