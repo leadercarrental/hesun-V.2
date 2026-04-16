@@ -768,12 +768,12 @@ p { margin-bottom: 1rem; }
 
 /* ==================== PHOTO ROW ==================== */
 .photo-row-section {
-  background: #f5f0eb;
+  background: #0a0a0a;
   padding: 32px 20px;
 }
 
 .photo-row-dark {
-  background: #1a1a1a;
+  background: #0a0a0a;
 }
 
 .photo-row {
@@ -790,7 +790,12 @@ p { margin-bottom: 1rem; }
   aspect-ratio: 4/3;
 }
 
-.photo-row-item img {
+.photo-row-tall .photo-row-item {
+  aspect-ratio: 3/4;
+}
+
+.photo-row-item img,
+.photo-row-item video {
   width: 100%;
   height: 100%;
   object-fit: cover;
@@ -798,19 +803,20 @@ p { margin-bottom: 1rem; }
   transition: transform 0.4s ease;
 }
 
-.photo-row-item:hover img {
-  transform: scale(1.04);
+.photo-row-item:hover img,
+.photo-row-item:hover video {
+  transform: scale(1.03);
 }
 
 /* ==================== SERVICES NEW ==================== */
 .section-services-new {
-  background: #f5f0eb;
+  background: #111111;
   padding: 60px 20px;
 }
 
 .section-services-new .section-head h2 {
   font-size: 2rem;
-  color: #1a1a1a;
+  color: #D4A852;
   margin-bottom: 40px;
 }
 
@@ -823,17 +829,18 @@ p { margin-bottom: 1rem; }
 }
 
 .service-card-new {
-  background: #fff;
+  background: #1e1e1e;
+  border: 1px solid rgba(212, 168, 82, 0.2);
   border-radius: 20px;
   padding: 36px 24px 28px;
   text-align: center;
-  box-shadow: 0 2px 12px rgba(0,0,0,0.07);
-  transition: transform 0.3s ease, box-shadow 0.3s ease;
+  transition: transform 0.3s ease, border-color 0.3s ease, box-shadow 0.3s ease;
 }
 
 .service-card-new:hover {
   transform: translateY(-6px);
-  box-shadow: 0 8px 28px rgba(0,0,0,0.12);
+  border-color: #D4A852;
+  box-shadow: 0 8px 30px rgba(212, 168, 82, 0.15);
 }
 
 .service-icon-new {
@@ -845,26 +852,26 @@ p { margin-bottom: 1rem; }
 .service-card-new h3 {
   font-size: 1.2rem;
   font-weight: 800;
-  color: #1a1a1a;
+  color: #ffffff;
   margin-bottom: 10px;
 }
 
 .service-card-new p {
   font-size: 0.9rem;
-  color: #666;
+  color: #aaaaaa;
   line-height: 1.6;
   margin: 0;
 }
 
 /* ==================== INTERIOR ==================== */
 .section-interior {
-  background: #f5f0eb;
+  background: #111111;
   padding: 60px 20px;
 }
 
 .section-interior .section-head h2 {
   font-size: 2rem;
-  color: #1a1a1a;
+  color: #D4A852;
   margin-bottom: 36px;
 }
 
@@ -896,7 +903,7 @@ p { margin-bottom: 1rem; }
 .interior-desc {
   text-align: center;
   font-size: 1rem;
-  color: #555;
+  color: #aaaaaa;
   margin: 20px 0 28px;
   line-height: 1.6;
 }
@@ -930,12 +937,13 @@ p { margin-bottom: 1rem; }
 
 /* ==================== AMENITIES ==================== */
 .section-amenities {
-  background: #f5f0eb;
+  background: #111111;
   padding: 40px 20px 60px;
 }
 
 .amenities-card {
-  background: #dde6f0;
+  background: #1e2a38;
+  border: 1px solid rgba(212, 168, 82, 0.15);
   border-radius: 20px;
   padding: 40px;
   max-width: 1100px;
@@ -945,7 +953,7 @@ p { margin-bottom: 1rem; }
 .amenities-grid {
   display: grid;
   grid-template-columns: repeat(2, 1fr);
-  gap: 24px 40px;
+  gap: 28px 48px;
 }
 
 .amenity-item {
@@ -964,26 +972,26 @@ p { margin-bottom: 1rem; }
   display: block;
   font-size: 1rem;
   font-weight: 800;
-  color: #1a1a1a;
+  color: #ffffff;
   margin-bottom: 4px;
 }
 
 .amenity-item p {
   font-size: 0.85rem;
-  color: #555;
+  color: #aaaaaa;
   margin: 0;
   line-height: 1.5;
 }
 
 /* ==================== WHY US ==================== */
 .section-why {
-  background: #f5f0eb;
+  background: #111111;
   padding: 60px 20px;
 }
 
 .section-why .section-head h2 {
   font-size: 2rem;
-  color: #1a1a1a;
+  color: #D4A852;
   margin-bottom: 40px;
 }
 
@@ -996,13 +1004,18 @@ p { margin-bottom: 1rem; }
 }
 
 .why-card {
-  background: #fff;
+  background: #1e1e1e;
+  border: 1px solid rgba(212, 168, 82, 0.15);
   border-radius: 16px;
   padding: 28px 24px;
   display: flex;
   align-items: flex-start;
   gap: 16px;
-  box-shadow: 0 2px 10px rgba(0,0,0,0.06);
+  transition: border-color 0.3s ease;
+}
+
+.why-card:hover {
+  border-color: #D4A852;
 }
 
 .why-check {
@@ -1011,8 +1024,8 @@ p { margin-bottom: 1rem; }
   justify-content: center;
   width: 36px;
   height: 36px;
-  background: #5cb85c;
-  color: #fff;
+  background: #D4A852;
+  color: #1a1a1a;
   border-radius: 8px;
   font-size: 1.1rem;
   font-weight: 700;
@@ -1024,13 +1037,13 @@ p { margin-bottom: 1rem; }
   display: block;
   font-size: 1rem;
   font-weight: 800;
-  color: #1a1a1a;
+  color: #ffffff;
   margin-bottom: 6px;
 }
 
 .why-card p {
   font-size: 0.88rem;
-  color: #666;
+  color: #aaaaaa;
   margin: 0;
   line-height: 1.5;
 }
@@ -1041,6 +1054,10 @@ p { margin-bottom: 1rem; }
   .services-grid-new,
   .interior-grid-top {
     grid-template-columns: 1fr;
+  }
+
+  .photo-row-tall .photo-row-item {
+    aspect-ratio: 4/3;
   }
 
   .interior-grid-bottom,
