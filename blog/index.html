@@ -1,0 +1,677 @@
+<!DOCTYPE html>
+<html lang="zh-Hant">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>部落格 | 賀森包車旅遊</title>
+  <meta name="description" content="賀森包車旅遊部落格 - 台灣旅遊攻略、包車心得、景點介紹、旅遊故事。" />
+
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@400;500;600;700&family=Noto+Serif+TC:wght@300;400;500;600;700;900&family=Noto+Sans+TC:wght@300;400;500;700&display=swap" rel="stylesheet">
+
+  <link rel="stylesheet" href="../assets/css/styles.css" />
+  <style>
+    .blog-header {
+      background: linear-gradient(135deg, var(--color-black) 0%, var(--color-dark) 100%);
+      color: var(--color-white);
+      padding: 60px 20px;
+      text-align: center;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .blog-header::before {
+      content: '';
+      position: absolute;
+      inset: 0;
+      background: radial-gradient(circle at 20% 50%, rgba(212, 175, 55, 0.1) 0%, transparent 50%);
+    }
+
+    .blog-header-content {
+      position: relative;
+      z-index: 2;
+      max-width: 700px;
+      margin: 0 auto;
+    }
+
+    .blog-header h1 {
+      font-size: 2.8rem;
+      margin-bottom: 1rem;
+    }
+
+    .blog-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(350px, 1fr));
+      gap: 40px;
+      padding: 80px 20px;
+      max-width: 1200px;
+      margin: 0 auto;
+    }
+
+    .blog-card {
+      background: var(--color-white);
+      border: 1px solid rgba(212, 175, 55, 0.1);
+      border-radius: var(--border-radius);
+      overflow: hidden;
+      transition: var(--transition-slow);
+      display: flex;
+      flex-direction: column;
+      height: 100%;
+      cursor: pointer;
+    }
+
+    .blog-card:hover {
+      transform: translateY(-10px);
+      border-color: var(--color-gold);
+      box-shadow: 0 20px 50px rgba(0, 0, 0, 0.1);
+    }
+
+    .blog-thumbnail {
+      height: 200px;
+      background: linear-gradient(135deg, rgba(212, 175, 55, 0.2), rgba(212, 175, 55, 0.05));
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 4rem;
+      color: rgba(212, 175, 55, 0.3);
+      overflow: hidden;
+      position: relative;
+    }
+
+    .blog-card:hover .blog-thumbnail {
+      transform: scale(1.05);
+    }
+
+    .blog-content {
+      padding: 30px;
+      flex-grow: 1;
+      display: flex;
+      flex-direction: column;
+    }
+
+    .blog-meta {
+      display: flex;
+      gap: 20px;
+      font-size: 0.85rem;
+      color: var(--color-gold);
+      margin-bottom: 1rem;
+      flex-wrap: wrap;
+    }
+
+    .blog-meta span {
+      display: flex;
+      align-items: center;
+      gap: 5px;
+    }
+
+    .blog-card h3 {
+      color: var(--color-dark);
+      margin-bottom: 1rem;
+      flex-grow: 1;
+    }
+
+    .blog-card p {
+      color: var(--color-accent);
+      font-size: 0.95rem;
+      line-height: 1.6;
+      margin-bottom: 1.5rem;
+    }
+
+    .blog-link {
+      color: var(--color-gold);
+      text-decoration: none;
+      font-weight: 600;
+      transition: var(--transition);
+      display: inline-block;
+    }
+
+    .blog-link:hover {
+      color: var(--color-gold-light);
+      transform: translateX(5px);
+    }
+
+    .blog-empty {
+      text-align: center;
+      padding: 80px 20px;
+      color: var(--color-accent);
+    }
+
+    .blog-empty h3 {
+      margin-bottom: 1rem;
+    }
+
+    .blog-empty p {
+      margin-bottom: 2rem;
+    }
+
+    .back-link {
+      display: inline-block;
+      padding: 10px 20px;
+      color: var(--color-gold);
+      text-decoration: none;
+      margin: 20px;
+      font-weight: 600;
+      transition: var(--transition);
+    }
+
+    .back-link:hover {
+      color: var(--color-gold-light);
+    }
+
+    .back-link::before {
+      content: '← ';
+      margin-right: 5px;
+    }
+  </style>
+</head>
+<body>
+
+  <!-- =========== NAV =========== -->
+  <header class="site-header" id="siteHeader">
+    <div class="nav-container">
+      <a href="../" class="brand">
+        <span class="brand-mark">H</span>
+        <span class="brand-name">
+          <span class="brand-zh">賀森包車旅遊</span>
+          <span class="brand-en">HESUN PRIVATE TOUR</span>
+        </span>
+      </a>
+
+      <button class="menu-toggle" id="menuToggle" aria-label="開啟選單" aria-expanded="false">
+        <span></span><span></span><span></span>
+      </button>
+
+      <nav class="nav-menu" id="navMenu">
+        <ul>
+          <li><a href="../#home">首頁</a></li>
+          <li><a href="../#services">服務項目</a></li>
+          <li><a href="../#fleet">豪華車隊</a></li>
+          <li><a href="../#routes">熱門路線</a></li>
+          <li><a href="../#about">關於我們</a></li>
+          <li><a href="#">部落格</a></li>
+          <li><a href="../#contact" class="nav-cta">立即預約</a></li>
+        </ul>
+      </nav>
+    </div>
+  </header>
+
+  <!-- =========== BLOG HEADER =========== -->
+  <section class="blog-header">
+    <div class="blog-header-content">
+      <h1>賀森部落格</h1>
+      <p>台灣旅遊攻略、包車心得、景點介紹、旅遊故事與經驗分享</p>
+    </div>
+  </section>
+
+  <!-- =========== BLOG CONTENT =========== -->
+  <main>
+    <div class="blog-grid" id="blogContainer">
+      <!-- 部落格文章會動態加載到這裡 -->
+    </div>
+  </main>
+
+  <!-- =========== FOOTER =========== -->
+  <footer class="site-footer">
+    <div class="container footer-inner">
+      <div class="footer-brand">
+        <span class="brand-mark">H</span>
+        <div>
+          <strong>賀森包車旅遊</strong>
+          <small>Hesun Private Tour & Chauffeur</small>
+        </div>
+      </div>
+      <nav class="footer-nav">
+        <a href="../#services">服務項目</a>
+        <a href="../#fleet">豪華車隊</a>
+        <a href="../#routes">熱門路線</a>
+        <a href="#">部落格</a>
+        <a href="../#contact">立即預約</a>
+      </nav>
+      <p class="footer-copy">© <span id="year"></span> 賀森包車旅遊 HESUN PRIVATE TOUR. All rights reserved.</p>
+    </div>
+  </footer>
+
+  <script src="../assets/js/main.js"></script>
+  <script>
+    // 部落格數據 - 可以編輯這個數組來添加文章
+    const blogPosts = [
+      {
+        id: 1,
+        title: '台北經典一日遊：故宮、士林、九份、野柳完整攻略',
+        date: '2024-04-15',
+        author: '賀森包車',
+        category: '台北旅遊',
+        emoji: '🏯',
+        excerpt: '北台灣最經典的景點組合！從故宮的文化底蘊到九份的懷舊風情，這條路線見證了台北的過去與現在。我們的司機兼導遊會為您講述每個景點背後的故事...',
+        content: `台北是台灣的首善之都，擁有豐富的文化遺產和現代風采。這篇文章將帶你深入了解台北最熱門的景點。
+
+從故宮博物院的古代藝術開始，你將被數千年的中華文明所震撼。接著前往士林官邸，感受前總統的生活故事。
+
+下午前往九份老街，品嚐芋圓和茶文化，穿梭在紅燈籠的巷弄中。最後來到野柳地質公園，欣賞女王頭和其他奇特的地形景觀。
+
+我們建議：
+- 早上8點出發
+- 每個景點停留2小時
+- 自備防曬和舒適的鞋子
+- 帶上相機記錄美好時光
+
+賀森包車提供的司機都對台北景點非常熟悉，可以根據你的興趣調整行程！`
+      },
+      {
+        id: 2,
+        title: '日月潭環湖：台灣最美的高山湖景',
+        date: '2024-04-10',
+        author: '賀森包車',
+        category: '中台灣',
+        emoji: '🏞️',
+        excerpt: '日月潭不只是台灣最大的天然淡水湖，更是一個充滿靈性和美景的地方。環湖一周約33公里，我們為你規劃了最舒適的包車遊覽方式...',
+        content: `日月潭是台灣最著名的風景區之一，位於南投埔里。這裡的景色會隨著四季變化而呈現不同的風貌。
+
+春天櫻花盛開，夏天綠意盎然，秋天楓葉轉紅，冬天雲霧飄渺。每個季節都有不同的美。
+
+環湖景點介紹：
+- 日月潭纜車：俯瞰整個湖景
+- 慈恩塔：登高望遠的最佳地點
+- 廖鄉長紅茶故事館：品嚐在地特產
+- 向山遊客中心：現代建築與自然結合
+
+我們的包車服務包括：
+✓ 專業司機熟悉所有景點
+✓ 靈活的時間安排
+✓ 舒適的車內體驗
+✓ 停車點的智慧安排
+
+最佳遊覽時間：10月-11月（天氣宜人，人流適中）`
+      },
+      {
+        id: 3,
+        title: '花東縱谷秘境：太魯閣、七星潭、伯朗大道',
+        date: '2024-04-05',
+        author: '賀森包車',
+        category: '花東',
+        emoji: '⛰️',
+        excerpt: '花東是台灣最原始、最秀麗的地方。壯闊的太魯閣峽谷、蔚藍的太平洋、金黃的稻田...這是一次靈魂的旅程...',
+        content: `花東縱谷被譽為台灣的最後一片淨土。這裡遠離都市的喧囂，保留了台灣最原始的自然風貌和原住民文化。
+
+必訪景點：
+
+【太魯閣國家公園】
+- 燕子口：峭壁中的步道，驚險刺激
+- 天祥：台灣最美的山水結合
+- 白楊瀑布：溪谷中的隱藏瀑布
+
+【七星潭】
+- 台灣東部最美的海灘
+- 清澈的海水和細軟的鵝卵石
+- 傍晚是攝影最佳時刻
+
+【池上伯朗大道】
+- 金黃稻浪迎風搖曳
+- 台灣最美的田園風景
+- 騎自行車遊覽最佳
+
+【三仙台】
+- 三座仙人島嶼
+- 八拱跨海大橋
+- 朝日與夕陽都很壯觀
+
+包車遊花東的優勢：
+✓ 路線複雜，自駕容易迷路
+✓ 景點分散，包車最省時
+✓ 司機可兼導遊講解文化
+✓ 安全舒適的旅遊體驗
+
+建議行程：3-4天，可更深入體驗每個景點的魅力。`
+      },
+      {
+        id: 4,
+        title: '宜蘭私房景點：礁溪溫泉、清水地熱、羅東文青之旅',
+        date: '2024-03-28',
+        author: '賀森包車',
+        category: '宜蘭',
+        emoji: '♨️',
+        excerpt: '距離台北只有一小時車程的宜蘭，擁有溫泉、美食、文青小鎮。這是台北人的後花園，也是療癒之地...',
+        content: `宜蘭是台灣少數同時擁有山、海、溫泉、美食的地方。從台北出發不到一小時就能到達，是週末包車的最佳選擇。
+
+【礁溪溫泉】
+台灣少有的平原溫泉。溫度約58℃，富含礦物質。
+
+景點推薦：
+- 礁溪溫泉公園：免費泡腳
+- 礁溪溫泉飯店：享受設施齐全的溫泉體驗
+- 礁溪老街：品嚐在地小吃和溫泉蛋
+
+【清水地熱】
+自然湧出的地熱溫泉，完全免費！
+- 自帶雞蛋、玉米來此煮食
+- 親子同樂的最佳去處
+- 感受大地的溫度
+
+【羅東】
+文青與傳統結合的小鎮
+- 羅東林場：日式木造建築
+- 羅東文創園區：創意展覽
+- 羅東夜市：台灣三大夜市之一
+
+【其他推薦】
+- 冬山河親水公園
+- 梅花湖風景區
+- 三星蔥仔寮體驗
+
+宜蘭美食推薦：
+🍜 牛舌餅（宜蘭特產）
+🥟 肉羹（羅東必吃）
+🍶 宜蘭威士忌（蘭陽威士忌廠）
+
+最佳遊覽時間：春夏秋冬都各有魅力
+建議天數：1-2天（近距離輕旅行）`
+      },
+      {
+        id: 5,
+        title: '包車旅遊的秘訣：如何規劃一趟完美的台灣之旅',
+        date: '2024-03-20',
+        author: '賀森包車',
+        category: '旅遊建議',
+        emoji: '✈️',
+        excerpt: '包車旅遊與自駕、跟團有何不同？我們整理了10年來累積的旅遊經驗，分享如何規劃一趟既舒適又充實的台灣包車之旅...',
+        content: `經過10年的運營，我們發現包車旅遊的最大優勢在於「自由度」和「舒適度」的完美結合。
+
+【包車 vs 自駕 vs 跟團】
+
+包車旅遊的優勢：
+✓ 不用煩惱開車、停車、找路
+✓ 司機兼導遊，深度了解景點
+✓ 時間完全彈性，不被行程綁架
+✓ 體驗舒適，可以車上休息
+✓ 停車便利，到達景點即刻遊覽
+✓ 安全係數最高
+
+【如何規劃完美的包車行程】
+
+第一步：確定旅遊主題
+- 文化之旅：故宮、廟宇、古蹟
+- 自然風景：山河湖海、大自然
+- 美食之旅：小吃、餐廳、特產
+- 放鬆療癒：溫泉、SPA、民宿
+
+第二步：選擇合適的車型
+- 1-3人：豪華轎車
+- 4-6人：7人座豪華車
+- 7-8人：9人座商務車
+- 團隊包車：多車聯動
+
+第三步：規劃行程
+- 地點距離與車程時間
+- 各景點停留時間（建議2-3小時）
+- 美食時間與用餐地點
+- 天氣與季節考慮
+
+第四步：與司機溝通
+- 告訴司機你的偏好
+- 詢問司機的當地知識
+- 享受司機推薦的秘境與美食
+
+【打造完美旅程的10個秘訣】
+
+1. 行程不要排得太滿
+   - 留2小時緩衝時間
+   - 允許臨時改變計畫
+
+2. 選擇淡季出遊
+   - 避開假日人潮
+   - 景點更有品質的遊覽體驗
+
+3. 準備充足的現金和零錢
+   - 台灣許多景點還是現金付款
+   - 停車費、廁所費可能需要零錢
+
+4. 準備舒適的服裝和鞋子
+   - 台灣天氣多變，帶件薄外套
+   - 舒適的鞋子很重要
+
+5. 提前預約餐廳
+   - 特別是知名小吃
+   - 避免排隊浪費時間
+
+6. 攜帶必需品
+   - 防曬、防蚊液
+   - 濕紙巾、手機行動電源
+   - 簡單藥物
+
+7. 保持靈活心態
+   - 行程可隨時調整
+   - 發現有趣的地方不妨多停留
+
+8. 拍照紀錄每一刻
+   - 但不要過度拍照，忽視美景
+   - 享受當下也很重要
+
+9. 與同行者溝通
+   - 確保大家都享受行程
+   - 尊重不同的旅遊節奏
+
+10. 給司機留下評價和小費
+    - 好的司機值得感謝
+    - 你的評價幫助更多遊客找到好夥伴
+
+【最後的話】
+
+旅遊不是為了「去過」，而是為了「留下回憶」。
+
+包車旅遊讓你可以專注於感受旅途，而不是為瑣碎的事務煩惱。賀森包車的每位司機都希望為你提供最好的服務，讓你的台灣之旅成為人生中最珍貴的回憶。
+
+準備好開始你的下一趟旅程了嗎？立即聯絡我們預約吧！`
+      }
+    ];
+
+    // 動態渲染部落格文章
+    function renderBlog() {
+      const container = document.getElementById('blogContainer');
+
+      if (blogPosts.length === 0) {
+        container.innerHTML = `
+          <div style="grid-column: 1 / -1;" class="blog-empty">
+            <h3>🚀 即將推出</h3>
+            <p>我們正在準備精彩的部落格文章。敬請期待！</p>
+            <a href="../#contact" class="btn btn-primary">預訂包車行程</a>
+          </div>
+        `;
+        return;
+      }
+
+      container.innerHTML = blogPosts.map(post => `
+        <article class="blog-card" onclick="expandPost(${post.id})">
+          <div class="blog-thumbnail">${post.emoji}</div>
+          <div class="blog-content">
+            <div class="blog-meta">
+              <span>📅 ${new Date(post.date).toLocaleDateString('zh-Hant-TW')}</span>
+              <span>✍️ ${post.author}</span>
+              <span>📂 ${post.category}</span>
+            </div>
+            <h3>${post.title}</h3>
+            <p>${post.excerpt}</p>
+            <a href="#" class="blog-link" onclick="expandPost(${post.id}); return false;">閱讀全文 →</a>
+          </div>
+        </article>
+      `).join('');
+    }
+
+    // 展開文章
+    function expandPost(id) {
+      const post = blogPosts.find(p => p.id === id);
+      if (!post) return;
+
+      const content = `
+        <!DOCTYPE html>
+        <html lang="zh-Hant">
+        <head>
+          <meta charset="UTF-8" />
+          <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+          <title>${post.title} | 賀森包車旅遊</title>
+          <link rel="preconnect" href="https://fonts.googleapis.com">
+          <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+          <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@400;500;600;700&family=Noto+Serif+TC:wght@300;400;500;600;700;900&family=Noto+Sans+TC:wght@300;400;500;700&display=swap" rel="stylesheet">
+          <link rel="stylesheet" href="../assets/css/styles.css" />
+          <style>
+            .article-header {
+              background: linear-gradient(135deg, var(--color-black) 0%, var(--color-dark) 100%);
+              color: var(--color-white);
+              padding: 60px 20px;
+              text-align: center;
+            }
+            .article-header h1 {
+              font-size: 2.5rem;
+              margin-bottom: 1rem;
+            }
+            .article-meta {
+              display: flex;
+              justify-content: center;
+              gap: 30px;
+              font-size: 0.9rem;
+              margin-top: 1rem;
+              flex-wrap: wrap;
+            }
+            .article-content {
+              max-width: 800px;
+              margin: 60px auto;
+              padding: 0 20px;
+              line-height: 1.8;
+            }
+            .article-content p {
+              margin-bottom: 1.5rem;
+              color: var(--color-accent);
+              font-size: 1rem;
+            }
+            .article-content h2 {
+              color: var(--color-dark);
+              margin-top: 2rem;
+              margin-bottom: 1rem;
+              font-size: 1.8rem;
+            }
+            .article-content h3 {
+              color: var(--color-dark);
+              margin-top: 1.5rem;
+              margin-bottom: 0.8rem;
+              font-size: 1.4rem;
+            }
+            .article-content ul, .article-content ol {
+              margin-left: 20px;
+              margin-bottom: 1.5rem;
+              color: var(--color-accent);
+            }
+            .article-content li {
+              margin-bottom: 0.8rem;
+            }
+            .cta-box {
+              background: linear-gradient(135deg, rgba(212, 175, 55, 0.1), transparent);
+              border: 2px solid var(--color-gold);
+              border-radius: 8px;
+              padding: 40px;
+              margin: 60px 0;
+              text-align: center;
+            }
+            .cta-box h3 {
+              color: var(--color-dark);
+              margin-bottom: 1rem;
+            }
+          </style>
+        </head>
+        <body>
+          <header class="site-header" id="siteHeader">
+            <div class="nav-container">
+              <a href="../" class="brand">
+                <span class="brand-mark">H</span>
+                <span class="brand-name">
+                  <span class="brand-zh">賀森包車旅遊</span>
+                  <span class="brand-en">HESUN PRIVATE TOUR</span>
+                </span>
+              </a>
+              <button class="menu-toggle" id="menuToggle" aria-label="開啟選單" aria-expanded="false">
+                <span></span><span></span><span></span>
+              </button>
+              <nav class="nav-menu" id="navMenu">
+                <ul>
+                  <li><a href="../#home">首頁</a></li>
+                  <li><a href="../#services">服務項目</a></li>
+                  <li><a href="../#fleet">豪華車隊</a></li>
+                  <li><a href="../#routes">熱門路線</a></li>
+                  <li><a href="../#about">關於我們</a></li>
+                  <li><a href="./index.html">部落格</a></li>
+                  <li><a href="../#contact" class="nav-cta">立即預約</a></li>
+                </ul>
+              </nav>
+            </div>
+          </header>
+
+          <article>
+            <header class="article-header">
+              <h1>${post.emoji} ${post.title}</h1>
+              <div class="article-meta">
+                <span>📅 ${new Date(post.date).toLocaleDateString('zh-Hant-TW')}</span>
+                <span>✍️ ${post.author}</span>
+                <span>📂 ${post.category}</span>
+              </div>
+            </header>
+
+            <main class="article-content">
+              ${post.content.split('\\n\\n').map(para => {
+                if (para.trim().startsWith('【')) {
+                  // Handle sections starting with 【
+                  const title = para.match(/【(.+?)】/)[1];
+                  const content = para.replace(/【.+?】/, '').trim();
+                  return '<h2>' + title + '</h2><p>' + content + '</p>';
+                } else if (para.trim().startsWith('-') || para.trim().startsWith('✓')) {
+                  // Handle lists
+                  const items = para.trim().split('\\n');
+                  const listItems = items.map(item => '<li>' + item.replace(/^[-✓\\s]+/, '') + '</li>').join('');
+                  return '<ul>' + listItems + '</ul>';
+                } else {
+                  return '<p>' + para.trim() + '</p>';
+                }
+              }).join('')}
+
+              <div class="cta-box">
+                <h3>準備好開始您的台灣包車之旅了嗎？</h3>
+                <p>立即聯絡我們，根據您的興趣規劃專屬行程</p>
+                <a href="../#contact" class="btn btn-primary">立即預約</a>
+              </div>
+            </main>
+          </article>
+
+          <footer class="site-footer">
+            <div class="container footer-inner">
+              <div class="footer-brand">
+                <span class="brand-mark">H</span>
+                <div>
+                  <strong>賀森包車旅遊</strong>
+                  <small>Hesun Private Tour & Chauffeur</small>
+                </div>
+              </div>
+              <nav class="footer-nav">
+                <a href="../#services">服務項目</a>
+                <a href="../#fleet">豪華車隊</a>
+                <a href="../#routes">熱門路線</a>
+                <a href="./index.html">部落格</a>
+                <a href="../#contact">立即預約</a>
+              </nav>
+              <p class="footer-copy">© <span id="year"></span> 賀森包車旅遊 HESUN PRIVATE TOUR. All rights reserved.</p>
+            </div>
+          </footer>
+
+          <script src="../assets/js/main.js"><\/script>
+        </body>
+        </html>
+      `;
+
+      // 打開新頁面顯示文章
+      const newTab = window.open();
+      newTab.document.write(content);
+      newTab.document.close();
+    }
+
+    // 初始化部落格
+    renderBlog();
+  </script>
+</body>
+</html>
