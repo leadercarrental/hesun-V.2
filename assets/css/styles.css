@@ -891,6 +891,12 @@ p { margin-bottom: 1rem; }
 }
 
 /* Right card – action buttons */
+.contact-card:last-child {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+}
+
 .card-btns {
   display: flex;
   flex-direction: column;
