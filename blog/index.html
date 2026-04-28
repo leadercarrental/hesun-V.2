@@ -697,7 +697,7 @@
             </header>
 
             <main class="article-content">
-              ${post.content.split('\\n\\n').map(para => {
+              ${post.content.split('\n\n').map(para => {
                 if (para.trim().startsWith('[IMAGE:')) {
                   const match = para.trim().match(/\[IMAGE:(.+?)\]/);
                   if (match) return '<figure style="margin:2rem 0;"><img src="' + match[1] + '" alt="" style="width:100%;border-radius:12px;box-shadow:0 4px 20px rgba(0,0,0,0.12);"></figure>';
@@ -706,8 +706,8 @@
                   const body = para.replace(/【.+?】/, '').trim();
                   return '<h2>' + title + '</h2>' + (body ? '<p>' + body + '</p>' : '');
                 } else if (para.trim().startsWith('-') || para.trim().startsWith('✓')) {
-                  const items = para.trim().split('\\n');
-                  const listItems = items.map(item => '<li>' + item.replace(/^[-✓\\s]+/, '') + '</li>').join('');
+                  const items = para.trim().split('\n');
+                  const listItems = items.map(item => '<li>' + item.replace(/^[-✓\s]+/, '') + '</li>').join('');
                   return '<ul>' + listItems + '</ul>';
                 } else {
                   return '<p>' + para.trim() + '</p>';
