@@ -175,6 +175,129 @@
     .blog-card:hover .blog-thumbnail img {
       transform: scale(1.05);
     }
+
+    /* ===== ARTICLE MODAL ===== */
+    .article-overlay {
+      display: none;
+      position: fixed;
+      inset: 0;
+      background: rgba(0, 0, 0, 0.85);
+      z-index: 10000;
+      overflow-y: auto;
+      padding: 20px;
+    }
+
+    .article-overlay.open {
+      display: block;
+    }
+
+    .article-box {
+      background: #fff;
+      max-width: 800px;
+      margin: 40px auto;
+      border-radius: 12px;
+      overflow: hidden;
+      position: relative;
+    }
+
+    .article-close-btn {
+      position: fixed;
+      top: 16px;
+      right: 16px;
+      background: var(--color-black);
+      color: var(--color-gold);
+      border: 1px solid var(--color-gold);
+      padding: 8px 18px;
+      font-size: 0.9rem;
+      cursor: pointer;
+      border-radius: 4px;
+      z-index: 10001;
+      transition: background 0.2s;
+    }
+
+    .article-close-btn:hover {
+      background: var(--color-gold);
+      color: var(--color-black);
+    }
+
+    .article-hero {
+      background: linear-gradient(135deg, #000 0%, #1a1a1a 100%);
+      color: #fff;
+      padding: 50px 40px 40px;
+    }
+
+    .article-hero h1 {
+      font-size: 1.9rem;
+      line-height: 1.4;
+      margin-bottom: 1rem;
+      color: #fff;
+    }
+
+    .article-hero-meta {
+      display: flex;
+      gap: 20px;
+      font-size: 0.85rem;
+      color: var(--color-gold);
+      flex-wrap: wrap;
+    }
+
+    .article-body {
+      padding: 40px;
+      line-height: 1.9;
+    }
+
+    .article-body p {
+      color: #444;
+      margin-bottom: 1.4rem;
+      font-size: 1rem;
+    }
+
+    .article-body h2 {
+      color: #111;
+      font-size: 1.5rem;
+      margin: 2.5rem 0 1rem;
+      padding-bottom: 0.4rem;
+      border-bottom: 2px solid rgba(212, 175, 55, 0.3);
+    }
+
+    .article-body ul {
+      margin: 0 0 1.4rem 1.2rem;
+      color: #444;
+    }
+
+    .article-body li {
+      margin-bottom: 0.6rem;
+    }
+
+    .article-body figure {
+      margin: 2rem 0;
+    }
+
+    .article-body figure img {
+      width: 100%;
+      border-radius: 10px;
+      box-shadow: 0 6px 24px rgba(0, 0, 0, 0.12);
+      display: block;
+    }
+
+    .article-cta {
+      background: linear-gradient(135deg, rgba(212,175,55,0.08), transparent);
+      border: 2px solid var(--color-gold);
+      border-radius: 8px;
+      padding: 36px;
+      margin-top: 3rem;
+      text-align: center;
+    }
+
+    .article-cta h3 {
+      color: #111;
+      margin-bottom: 0.8rem;
+    }
+
+    .article-cta p {
+      color: #666;
+      margin-bottom: 1.2rem;
+    }
   </style>
 </head>
 <body>
@@ -247,6 +370,14 @@
       <p class="footer-copy">© <span id="year"></span> 賀森包車旅遊 HEYSAN PRIVATE TOUR. All rights reserved.</p>
     </div>
   </footer>
+
+  <!-- ===== ARTICLE MODAL ===== -->
+  <div class="article-overlay" id="articleOverlay" onclick="handleOverlayClick(event)">
+    <button class="article-close-btn" onclick="closePost()">✕ 關閉</button>
+    <div class="article-box" id="articleBox">
+      <div id="articleContent"></div>
+    </div>
+  </div>
 
   <script src="../assets/js/main.js"></script>
   <script>
@@ -576,182 +707,72 @@
       `).join('');
     }
 
-    // 展開文章
+    // 解析內文段落為 HTML
+    function renderContent(content) {
+      return content.split('\n\n').map(para => {
+        const t = para.trim();
+        if (!t) return '';
+        if (t.startsWith('[IMAGE:')) {
+          const m = t.match(/\[IMAGE:(.+?)\]/);
+          return m ? '<figure><img src="' + m[1] + '" alt=""></figure>' : '';
+        }
+        if (t.startsWith('【')) {
+          const title = t.match(/【(.+?)】/)[1];
+          const body = t.replace(/【.+?】/, '').trim();
+          return '<h2>' + title + '</h2>' + (body ? '<p>' + body + '</p>' : '');
+        }
+        if (t.startsWith('-') || t.startsWith('✓')) {
+          const items = t.split('\n').map(i => '<li>' + i.replace(/^[-✓\s]+/, '') + '</li>').join('');
+          return '<ul>' + items + '</ul>';
+        }
+        return '<p>' + t + '</p>';
+      }).join('');
+    }
+
+    // 展開文章（Modal 方式）
     function expandPost(id) {
       const post = blogPosts.find(p => p.id === id);
       if (!post) return;
 
-      const baseUrl = window.location.origin + window.location.pathname.substring(0, window.location.pathname.lastIndexOf('/') + 1);
+      document.getElementById('articleContent').innerHTML =
+        '<div class="article-hero">' +
+          '<h1>' + post.emoji + ' ' + post.title + '</h1>' +
+          '<div class="article-hero-meta">' +
+            '<span>📅 ' + new Date(post.date).toLocaleDateString('zh-Hant-TW') + '</span>' +
+            '<span>✍️ ' + post.author + '</span>' +
+            '<span>📂 ' + post.category + '</span>' +
+          '</div>' +
+        '</div>' +
+        '<div class="article-body">' +
+          renderContent(post.content) +
+          '<div class="article-cta">' +
+            '<h3>準備好開始您的台灣包車之旅了嗎？</h3>' +
+            '<p>立即聯絡我們，根據您的興趣規劃專屬行程</p>' +
+            '<a href="../#contact" class="btn btn-primary">立即預約</a>' +
+          '</div>' +
+        '</div>';
 
-      const content = `
-        <!DOCTYPE html>
-        <html lang="zh-Hant">
-        <head>
-          <meta charset="UTF-8" />
-          <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-          <base href="${baseUrl}">
-          <title>${post.title} | 賀森包車旅遊</title>
-          <link rel="preconnect" href="https://fonts.googleapis.com">
-          <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-          <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@400;500;600;700&family=Noto+Serif+TC:wght@300;400;500;600;700;900&family=Noto+Sans+TC:wght@300;400;500;700&display=swap" rel="stylesheet">
-          <link rel="stylesheet" href="../assets/css/styles.css?v=10" />
-          <style>
-            .article-header {
-              background: linear-gradient(135deg, var(--color-black) 0%, var(--color-dark) 100%);
-              color: var(--color-white);
-              padding: 60px 20px;
-              text-align: center;
-            }
-            .article-header h1 {
-              font-size: 2.5rem;
-              margin-bottom: 1rem;
-            }
-            .article-meta {
-              display: flex;
-              justify-content: center;
-              gap: 30px;
-              font-size: 0.9rem;
-              margin-top: 1rem;
-              flex-wrap: wrap;
-            }
-            .article-content {
-              max-width: 800px;
-              margin: 60px auto;
-              padding: 0 20px;
-              line-height: 1.8;
-            }
-            .article-content p {
-              margin-bottom: 1.5rem;
-              color: var(--color-accent);
-              font-size: 1rem;
-            }
-            .article-content h2 {
-              color: var(--color-dark);
-              margin-top: 2rem;
-              margin-bottom: 1rem;
-              font-size: 1.8rem;
-            }
-            .article-content h3 {
-              color: var(--color-dark);
-              margin-top: 1.5rem;
-              margin-bottom: 0.8rem;
-              font-size: 1.4rem;
-            }
-            .article-content ul, .article-content ol {
-              margin-left: 20px;
-              margin-bottom: 1.5rem;
-              color: var(--color-accent);
-            }
-            .article-content li {
-              margin-bottom: 0.8rem;
-            }
-            .cta-box {
-              background: linear-gradient(135deg, rgba(212, 175, 55, 0.1), transparent);
-              border: 2px solid var(--color-gold);
-              border-radius: 8px;
-              padding: 40px;
-              margin: 60px 0;
-              text-align: center;
-            }
-            .cta-box h3 {
-              color: var(--color-dark);
-              margin-bottom: 1rem;
-            }
-          </style>
-        </head>
-        <body>
-          <header class="site-header" id="siteHeader">
-            <div class="nav-container">
-              <a href="../" class="brand">
-                <span class="brand-mark">H</span>
-                <span class="brand-name">
-                  <span class="brand-zh">賀森包車旅遊</span>
-                  <span class="brand-en">HEYSAN PRIVATE TOUR</span>
-                </span>
-              </a>
-              <button class="menu-toggle" id="menuToggle" aria-label="開啟選單" aria-expanded="false">
-                <span></span><span></span><span></span>
-              </button>
-              <nav class="nav-menu" id="navMenu">
-                <ul>
-                  <li><a href="../#home">首頁</a></li>
-                  <li><a href="../#services">服務項目</a></li>
-                  <li><a href="../#fleet">豪華車隊</a></li>
-                  <li><a href="../#routes">熱門路線</a></li>
-                  <li><a href="../#about">關於我們</a></li>
-                  <li><a href="./index.html">部落格</a></li>
-                  <li><a href="../#contact" class="nav-cta">立即預約</a></li>
-                </ul>
-              </nav>
-            </div>
-          </header>
-
-          <article>
-            <header class="article-header">
-              <h1>${post.emoji} ${post.title}</h1>
-              <div class="article-meta">
-                <span>📅 ${new Date(post.date).toLocaleDateString('zh-Hant-TW')}</span>
-                <span>✍️ ${post.author}</span>
-                <span>📂 ${post.category}</span>
-              </div>
-            </header>
-
-            <main class="article-content">
-              ${post.content.split('\n\n').map(para => {
-                if (para.trim().startsWith('[IMAGE:')) {
-                  const match = para.trim().match(/\[IMAGE:(.+?)\]/);
-                  if (match) return '<figure style="margin:2rem 0;"><img src="' + match[1] + '" alt="" style="width:100%;border-radius:12px;box-shadow:0 4px 20px rgba(0,0,0,0.12);"></figure>';
-                } else if (para.trim().startsWith('【')) {
-                  const title = para.match(/【(.+?)】/)[1];
-                  const body = para.replace(/【.+?】/, '').trim();
-                  return '<h2>' + title + '</h2>' + (body ? '<p>' + body + '</p>' : '');
-                } else if (para.trim().startsWith('-') || para.trim().startsWith('✓')) {
-                  const items = para.trim().split('\n');
-                  const listItems = items.map(item => '<li>' + item.replace(/^[-✓\s]+/, '') + '</li>').join('');
-                  return '<ul>' + listItems + '</ul>';
-                } else {
-                  return '<p>' + para.trim() + '</p>';
-                }
-              }).join('')}
-
-              <div class="cta-box">
-                <h3>準備好開始您的台灣包車之旅了嗎？</h3>
-                <p>立即聯絡我們，根據您的興趣規劃專屬行程</p>
-                <a href="../#contact" class="btn btn-primary">立即預約</a>
-              </div>
-            </main>
-          </article>
-
-          <footer class="site-footer">
-            <div class="container footer-inner">
-              <div class="footer-brand">
-                <span class="brand-mark">H</span>
-                <div>
-                  <strong>賀森包車旅遊</strong>
-                  <small>Hesun Private Tour & Chauffeur</small>
-                </div>
-              </div>
-              <nav class="footer-nav">
-                <a href="../#services">服務項目</a>
-                <a href="../#fleet">豪華車隊</a>
-                <a href="../#routes">熱門路線</a>
-                <a href="./index.html">部落格</a>
-                <a href="../#contact">立即預約</a>
-              </nav>
-              <p class="footer-copy">© <span id="year"></span> 賀森包車旅遊 HEYSAN PRIVATE TOUR. All rights reserved.</p>
-            </div>
-          </footer>
-
-          <script src="../assets/js/main.js"><\/script>
-        </body>
-        </html>
-      `;
-
-      // 打開新頁面顯示文章
-      const newTab = window.open();
-      newTab.document.write(content);
-      newTab.document.close();
+      document.getElementById('articleOverlay').classList.add('open');
+      document.body.style.overflow = 'hidden';
+      document.getElementById('articleBox').scrollTop = 0;
+      window.scrollTo(0, 0);
     }
+
+    // 關閉文章
+    function closePost() {
+      document.getElementById('articleOverlay').classList.remove('open');
+      document.body.style.overflow = '';
+    }
+
+    // 點擊遮罩關閉
+    function handleOverlayClick(e) {
+      if (e.target === document.getElementById('articleOverlay')) closePost();
+    }
+
+    // ESC 鍵關閉
+    document.addEventListener('keydown', function(e) {
+      if (e.key === 'Escape') closePost();
+    });
 
     // 初始化部落格
     renderBlog();
