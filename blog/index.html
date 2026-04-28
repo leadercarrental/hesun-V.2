@@ -163,6 +163,18 @@
       content: '← ';
       margin-right: 5px;
     }
+
+    .blog-thumbnail img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      display: block;
+      transition: var(--transition-slow);
+    }
+
+    .blog-card:hover .blog-thumbnail img {
+      transform: scale(1.05);
+    }
   </style>
 </head>
 <body>
@@ -372,6 +384,69 @@
 建議天數：1-2天（近距離輕旅行）`
       },
       {
+        id: 6,
+        title: '春季限定｜嘉義瑞里紫藤花一日遊・太平雲梯雙主題攻略',
+        date: '2026-04-28',
+        author: '賀森包車',
+        category: '嘉義旅遊',
+        emoji: '🌸',
+        image: 'images/ruili/cover.jpg',
+        excerpt: '四月的嘉義，藏著台灣版的「紫色浪漫」。瑞里印象咖啡莊園的紫藤花海搭配太平雲梯的壯闊山景，一趟讓人忘記煩惱、只想沉浸在美景裡的完美一日遊，就這樣悄悄展開了...',
+        content: `四月的嘉義，藏著台灣版的紫色浪漫。
+
+每年春天，當山城瑞里的紫藤花開，整片花牆如夢似幻地垂落，那一串串飽滿的紫色花穗，不輸日本藤花祭的美景。賀森包車這次帶著大家，從中部出發南下嘉義，先追花、再探橋，走一趟讓人忘記煩惱的春日一日遊。
+
+【第一站：瑞里印象民宿咖啡莊園】
+
+[IMAGE:images/ruili/sign.jpg]
+
+瑞里印象是當地人氣最旺的紫藤花打卡點，莊園庭園裡種滿了成熟的紫藤，花期時整面牆被淡紫色覆蓋，配上莊園特有的日式木造建築，美得像一幅畫。
+
+來這裡一定要做的事：
+- 在紫藤花牆前拍個夠，每個角度都是大片
+- 坐在戶外座位點杯咖啡，頭上就是滿滿的花
+- 與莊園內的熊賀咖可愛裝置合拍留念
+
+[IMAGE:images/ruili/portrait.jpg]
+
+【在花棚下喝咖啡，時間好像慢下來了】
+
+莊園設有戶外咖啡座，頭頂上的紫藤就這樣垂落下來，泡著茶、翻著雜誌，耳邊是鳥叫聲，鼻尖飄著花香——這種愜意，是城市裡找不到的。
+
+[IMAGE:images/ruili/cafe.jpg]
+
+莊園內還有一個超夢幻的粉色鐵框打卡區，兩隻大熊熊守護著粉色鞦韆，紫藤從上方垂落，是整趟行程最讓人捨不得離開的角落，旅客們在這裡拍了又拍，完全停不下來！
+
+【第二站：太平雲梯】
+
+吃飽賞花之後，我們驅車前往嘉義另一個震撼人心的景點——太平雲梯。
+
+[IMAGE:images/ruili/bridge.jpg]
+
+這座全長281公尺的高山吊橋，懸掛在山谷之間，踩上去微微搖晃，底下是連綿的翠綠山景，視野遼闊到讓人心曠神怡。橋頭還有一隻帥氣的不鏽鋼犀牛藝術裝置，非常吸睛。
+
+太平雲梯亮點：
+- 全台最長高山吊橋之一，山谷景觀壯觀震撼
+- 清晨天氣好時有機會看到雲海，像走在天空中
+- 橋頭不鏽鋼犀牛裝置是超人氣打卡點
+
+[IMAGE:images/ruili/group.jpg]
+
+全團在太平雲梯橋頭合影，藍天白雲、山巒疊翠，每個人臉上都掛著滿滿的笑容——這就是出來玩最好的表情。
+
+【賀森包車這樣幫你規劃】
+
+這趟南下嘉義的行程，我們安排了寬敞的頂規豪華保母車，一路上大家有說有笑，不用擔心開車找路，抵達景點直接下車就能拍照，輕鬆又舒適。
+
+賀森包車服務特色：
+✓ 嘉義一日遊包車接送，全程無需自駕煩惱
+✓ 景點停留時間彈性，不趕行程、玩得盡興
+✓ 司機熟悉在地路況，帶你找隱藏美景
+✓ 福斯 Crafter 頂規保母車，乘坐超舒適
+
+春天的嘉義，正是出遊的最好時機。如果你也想追紫藤花、走太平雲梯，歡迎聯絡賀森包車，讓我們幫你規劃一趟輕鬆又豐富的嘉義之旅！`
+      },
+      {
         id: 5,
         title: '包車旅遊的秘訣：如何規劃一趟完美的台灣之旅',
         date: '2024-03-20',
@@ -486,7 +561,7 @@
 
       container.innerHTML = blogPosts.map(post => `
         <article class="blog-card" onclick="expandPost(${post.id})">
-          <div class="blog-thumbnail">${post.emoji}</div>
+          <div class="blog-thumbnail">${post.image ? `<img src="${post.image}" alt="${post.title}">` : post.emoji}</div>
           <div class="blog-content">
             <div class="blog-meta">
               <span>📅 ${new Date(post.date).toLocaleDateString('zh-Hant-TW')}</span>
@@ -506,12 +581,15 @@
       const post = blogPosts.find(p => p.id === id);
       if (!post) return;
 
+      const baseUrl = window.location.origin + window.location.pathname.substring(0, window.location.pathname.lastIndexOf('/') + 1);
+
       const content = `
         <!DOCTYPE html>
         <html lang="zh-Hant">
         <head>
           <meta charset="UTF-8" />
           <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+          <base href="${baseUrl}">
           <title>${post.title} | 賀森包車旅遊</title>
           <link rel="preconnect" href="https://fonts.googleapis.com">
           <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -620,13 +698,14 @@
 
             <main class="article-content">
               ${post.content.split('\\n\\n').map(para => {
-                if (para.trim().startsWith('【')) {
-                  // Handle sections starting with 【
+                if (para.trim().startsWith('[IMAGE:')) {
+                  const match = para.trim().match(/\[IMAGE:(.+?)\]/);
+                  if (match) return '<figure style="margin:2rem 0;"><img src="' + match[1] + '" alt="" style="width:100%;border-radius:12px;box-shadow:0 4px 20px rgba(0,0,0,0.12);"></figure>';
+                } else if (para.trim().startsWith('【')) {
                   const title = para.match(/【(.+?)】/)[1];
-                  const content = para.replace(/【.+?】/, '').trim();
-                  return '<h2>' + title + '</h2><p>' + content + '</p>';
+                  const body = para.replace(/【.+?】/, '').trim();
+                  return '<h2>' + title + '</h2>' + (body ? '<p>' + body + '</p>' : '');
                 } else if (para.trim().startsWith('-') || para.trim().startsWith('✓')) {
-                  // Handle lists
                   const items = para.trim().split('\\n');
                   const listItems = items.map(item => '<li>' + item.replace(/^[-✓\\s]+/, '') + '</li>').join('');
                   return '<ul>' + listItems + '</ul>';
