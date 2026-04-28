@@ -690,7 +690,8 @@
         return;
       }
 
-      container.innerHTML = blogPosts.map(post => `
+      const sorted = [...blogPosts].sort((a, b) => new Date(b.date) - new Date(a.date));
+      container.innerHTML = sorted.map(post => `
         <article class="blog-card" onclick="expandPost(${post.id})">
           <div class="blog-thumbnail">${post.image ? `<img src="${post.image}" alt="${post.title}">` : post.emoji}</div>
           <div class="blog-content">
