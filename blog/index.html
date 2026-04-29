@@ -299,6 +299,33 @@
       margin-bottom: 1.2rem;
     }
 
+    /* 雙圖並排 */
+    .image-pair {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 14px;
+      margin: 2rem 0;
+    }
+
+    .image-pair figure {
+      margin: 0;
+    }
+
+    .image-pair img {
+      width: 100%;
+      height: 260px;
+      object-fit: cover;
+      border-radius: 10px;
+      box-shadow: 0 6px 24px rgba(0, 0, 0, 0.12);
+      display: block;
+    }
+
+    @media (max-width: 600px) {
+      .image-pair {
+        grid-template-columns: 1fr;
+      }
+    }
+
     /* Cover image */
     .article-cover-wrap {
       width: 100%;
@@ -464,6 +491,108 @@
     // 部落格數據 - 可以編輯這個數組來添加文章
     const blogPosts = [
       {
+        id: 7,
+        title: '七天六夜環島壯遊｜帶著外籍貴賓玩遍寶島台灣',
+        date: '2026-04-29',
+        author: '賀森包車',
+        category: '環島包車',
+        emoji: '🗺️',
+        image: 'images/island7days/cover.jpg',
+        excerpt: '七天六夜、五個城市、一輛頂規保母車——從花蓮出發，沿著東海岸一路玩到恆春半島、高雄、阿里山、日月潭，最後在台北劃下完美句點。卡丁車、Jeep 越野、原住民風味宴……每一天都是難忘的故事。',
+        content: `七天六夜，一輛頂規福斯 Crafter 保母車，載著一群外籍貴賓把台灣從東到西繞了一圈。
+從松山機場接到最後一站台北，花蓮、台東、墾丁、高雄、阿里山、日月潭、台中全走到——這是賀森包車接過最有成就感的一趟行程之一。
+
+【Day 1｜松山機場接機，花蓮初相遇】
+
+下午航班落地松山，豪哥準時在出口舉牌等候，一行人把行李搬上 Crafter，往東出發，目標花蓮。
+
+車廂寬敞安靜，高背真皮座椅、藍光氣氛燈，長途路程也不覺得累。客人坐進去的第一句話是：「這根本是飯店！」
+
+[IMAGE:images/island7days/crafter-interior.jpg]
+
+第一晚住進煙波大飯店花蓮館，傍晚帶大家逛了花蓮市區和夜市，試試在地小吃。外籍客人看到夜市攤販的熱鬧程度，眼睛瞪得大大的，不停拍照。
+
+【Day 2｜七星潭、清水斷崖，花蓮最美的兩張臉】
+
+花蓮讓外國人最震撼的，永遠是那兩個地方——七星潭和清水斷崖。
+
+七星潭的礫石海灘在藍天下格外純淨，客人自發性地疊起石頭堆，說這是許願的方式，笑聲傳得很遠。全團在海堤大石碑前合影，有說有笑，根本不像才認識不久的陌生人。
+
+[PAIR:images/island7days/qixingtan-stones.jpg|images/island7days/qixingtan-group.jpg]
+
+清水斷崖則是讓所有人安靜下來的地方。那面峭壁從山頂一路削下去直接插入太平洋，規模大到說不出話。我們停下來在觀景台拍了一張大合照，背後是整片藍——山是藍的、海是藍的、天是藍的。
+
+[IMAGE:images/island7days/qingshui-cliff.jpg]
+
+下午在花蓮縱谷還玩了一場戶外趣味射靶活動，大家輪流在廣闊草地上挑戰投球，中央山脈就在背後當佈景，小朋友投得比大人準，笑翻全場。
+
+[IMAGE:images/island7days/hualien-activity.jpg]
+
+【Day 3｜台東南迴秘境，原住民風味晚宴】
+
+台東往墾丁的南迴公路，是台灣藏得最好的秘密之一。一路沿山海之間行駛，偶爾拐進小徑走到黑岩海岸邊，我們帶客人鑽進天然海蝕洞，被大自然的力量震撼到停在原地不動。
+
+[PAIR:images/island7days/rocky-coast.jpg|images/island7days/cave.jpg]
+
+傍晚抵達墾丁後，夜晚走進打鹿岸原住民主題餐廳。客人坐定後，桌上直接上一塊大石頭和木槌，要自己動手搗特製料理——這一幕讓外籍客人興奮地說，這是整趟旅行「最酷的晚餐」。
+
+[IMAGE:images/island7days/aboriginal-dinner.jpg]
+
+【Day 4｜墾丁恐龍賽車場，Jeep 越野體驗】
+
+這一天是整趟旅程的活動高潮。
+
+早上帶客人前往「墾丁恐龍賽車場」體驗卡丁車，場地旁邊還有等比例恐龍裝置，小朋友看到整個人瘋掉，套上安全帽二話不說跳進車裡。兩台車在賽道上你追我跑，彎道一個接一個，根本不想停。
+
+[PAIR:images/island7days/kart1.jpg|images/island7days/kart2.jpg]
+
+下午換搭 Jeep 越野車，感受截然不同的刺激。坐在敞篷吉普裡迎著海風，小朋友甚至爬到車頂，一整趟笑聲不斷。
+
+[IMAGE:images/island7days/jeep.jpg]
+
+晚上前往高雄六合夜市，一杯木瓜牛奶下去，外籍客人正式宣布台灣夜市是世界奇景。
+
+[IMAGE:images/island7days/nightmarket.jpg]
+
+【Day 5｜佛光山莊嚴禮讚，阿里山雲霧林道】
+
+高雄早上帶客人至佛光山，感受台灣最大佛教聖地的莊嚴氣息。宏偉的山門牌樓讓外籍貴賓直呼壯觀。
+
+[IMAGE:images/island7days/foguangshan.jpg]
+
+下午往阿里山前行，山路迂迴、雲霧繞林，窗外綠意一層一層往上堆疊。Crafter 車廂裡大螢幕放著音樂，大家說說笑笑，一路就到了山頂。晚間趕到日月潭，在湖邊餐廳享用晚餐，夜幕下的湖面靜得像一面鏡子。
+
+【Day 6｜日月潭環湖，搭船遊湖】
+
+清晨的日月潭少了白天人潮，湖面映著遠山，美得很安靜。全團在日月潭石碑前留下整趟旅程最有代表性的合影——背後那片水色和山色，幾乎不需要修圖。
+
+[PAIR:images/island7days/alishan-group.jpg|images/island7days/cover.jpg]
+
+搭遊湖船繞行日月潭，穿上救生衣上船，湖風徐徐，孩子們靠在船舷往外看，大人端著相機拍個不停。
+
+[IMAGE:images/island7days/sunmoon-boat.jpg]
+
+傍晚離開日月潭，驅車前往台中永豐棧酒店，午餐在頂級鱘龍魚農莊大快朵頤。
+
+【Day 7｜台中歌劇院，台北101，完美落幕】
+
+最後一天，早上遊台中國家歌劇院，建築本身就是一件藝術品，曲面牆體讓外籍客人驚豔不已。接著一路北上台北，下午在 101 和國父紀念館走走逛逛，城市全景讓大家拍個沒完。
+
+傍晚把客人送進台北福容大飯店，行李搬進門的那一刻，七天六夜的台灣環島正式劃下句點。
+
+道別時，客人說台灣比他們想像的更美、更好玩——這句話，是我們做這份工作最有成就感的瞬間。
+
+[IMAGE:images/island7days/taitung-coast.jpg]
+
+【賀森包車的環島服務】
+
+一趟環島不只是「把人從 A 送到 B」，而是讓旅程中的每一段路都有故事可說。我們的頂規福斯 Crafter 保母車，寬敞舒適，高速公路上大家可以休息睡覺，到了景點就精神飽滿下車玩。
+
+全程由專業司機帶路，熟悉各地景點、餐廳、停車位，不用擔心找路，把全部的注意力留給旅行本身。
+
+如果你也想來一趟環島壯遊，歡迎聯繫賀森包車，讓我們幫你規劃屬於你們的台灣故事。`
+      },
+      {
         id: 6,
         title: '春季限定｜嘉義瑞里紫藤花一日遊・太平雲梯雙主題攻略',
         date: '2026-04-28',
@@ -571,6 +700,20 @@
 
         // 略過空行
         if (!line) { i++; continue; }
+
+        // [PAIR:img1|img2] 雙圖並排
+        if (line.startsWith('[PAIR:')) {
+          const m = line.match(/\[PAIR:([^|]+)\|([^\]]+)\]/);
+          if (m) {
+            html.push(
+              '<div class="image-pair">' +
+                '<figure><img src="' + m[1].trim() + '" loading="lazy" alt=""></figure>' +
+                '<figure><img src="' + m[2].trim() + '" loading="lazy" alt=""></figure>' +
+              '</div>'
+            );
+          }
+          i++; continue;
+        }
 
         // [IMAGE:path] 或 [IMAGE:path|圖說]
         if (line.startsWith('[IMAGE:')) {
