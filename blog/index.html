@@ -363,6 +363,23 @@
       background: #000;
     }
 
+    /* YouTube Shorts 嵌入 */
+    .youtube-shorts-wrap {
+      margin: 2rem auto;
+      max-width: 360px;
+      border-radius: 12px;
+      overflow: hidden;
+      box-shadow: 0 6px 24px rgba(0, 0, 0, 0.15);
+      aspect-ratio: 9 / 16;
+    }
+
+    .youtube-shorts-wrap iframe {
+      width: 100%;
+      height: 100%;
+      border: none;
+      display: block;
+    }
+
     /* Ordered list */
     .article-body ol {
       margin: 0 0 1.4rem 1.4rem;
@@ -541,6 +558,10 @@
 [IMAGE:images/arts-castle/antique-cabinet.jpg]
 
 館內有一組龐大的歐式手工雕刻古董展示櫃，每一格都陳列著歲月留下來的東西——瓷器、老鐘、銅燈座、瓷偶……細看每一件小物，都像是從某個時代流傳下來的記憶。這種密度的收藏，在台灣的民宿裡幾乎看不到。
+
+【來感受一下整體空間氛圍】
+
+[YOUTUBE:L3dhUFrcS4A]
 
 【住在清境雲霧裡的城堡感】
 
@@ -775,6 +796,21 @@
 
         // 略過空行
         if (!line) { i++; continue; }
+
+        // [YOUTUBE:id] YouTube 嵌入
+        if (line.startsWith('[YOUTUBE:')) {
+          const m = line.match(/\[YOUTUBE:([^\]]+)\]/);
+          if (m) {
+            html.push(
+              '<div class="youtube-shorts-wrap">' +
+                '<iframe src="https://www.youtube.com/embed/' + m[1].trim() + '?rel=0" ' +
+                'allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" ' +
+                'allowfullscreen loading="lazy"></iframe>' +
+              '</div>'
+            );
+          }
+          i++; continue;
+        }
 
         // [VIDEO:path] 影片
         if (line.startsWith('[VIDEO:')) {
