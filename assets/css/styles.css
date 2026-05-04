@@ -287,6 +287,7 @@ p { margin-bottom: 1rem; }
     top: 100%;
     left: 0;
     right: 0;
+    z-index: 1100;
     background: var(--color-black);
     flex-direction: column;
     padding: 20px;
