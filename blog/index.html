@@ -367,17 +367,25 @@
     .youtube-shorts-wrap {
       margin: 2rem auto;
       max-width: 360px;
+      position: relative;
       border-radius: 12px;
       overflow: hidden;
       box-shadow: 0 6px 24px rgba(0, 0, 0, 0.15);
-      aspect-ratio: 9 / 16;
+    }
+
+    .youtube-shorts-wrap::before {
+      content: '';
+      display: block;
+      padding-top: 177.78%;
     }
 
     .youtube-shorts-wrap iframe {
+      position: absolute;
+      top: 0;
+      left: 0;
       width: 100%;
       height: 100%;
       border: none;
-      display: block;
     }
 
     /* Ordered list */
