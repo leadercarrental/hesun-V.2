@@ -369,9 +369,9 @@
         </div>
 
         <!-- 右卡片：聯絡方式 -->
-        <div class="contact-card">
-          <h3 class="card-title">包車旅遊、報價 / 預約諮問</h3>
-          <div class="card-btns">
+        <div class="contact-card" id="contact-card-right">
+          <h3 class="card-title" id="contact-card-title">包車旅遊、報價 / 預約諮問</h3>
+          <div class="card-btns" id="contact-card-btns">
             <a href="tel:+886423112111" class="card-action-btn">
               ☎️ 立即撥打電話
             </a>
@@ -412,5 +412,24 @@
   </footer>
 
   <script src="assets/js/main.js"></script>
+  <script>
+    // 中國版網站（Cloudflare Pages）換成微信 / 小紅書 / 抖音
+    if (window.location.hostname === 'leadercarrental779.pages.dev') {
+      document.getElementById('contact-card-title').textContent = '包車旅遊、報價 / 預約諮問';
+
+      document.getElementById('contact-card-btns').innerHTML = `
+        <div style="text-align:center; margin-bottom:12px;">
+          <img src="assets/images/wechat-qr.jpg" alt="微信 QR Code" style="width:160px; border-radius:8px; border:2px solid #d4af37;" />
+          <p style="margin-top:6px; font-size:0.85rem; color:#d4af37;">微信掃码加好友 · leadercar779</p>
+        </div>
+        <a href="https://xhslink.com/m/5Lr7fXtU0WS" target="_blank" rel="noopener" class="card-action-btn">
+          📕 小红书
+        </a>
+        <a href="https://v.douyin.com/W2NueRAVdyk/" target="_blank" rel="noopener" class="card-action-btn">
+          🎵 抖音
+        </a>
+      `;
+    }
+  </script>
 </body>
 </html>
