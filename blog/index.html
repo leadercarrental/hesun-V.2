@@ -331,6 +331,25 @@
       margin-bottom: 1.2rem;
     }
 
+    /* 關鍵字標籤 */
+    .article-tags {
+      margin: 2.5rem 0 0.5rem;
+      display: flex;
+      flex-wrap: wrap;
+      gap: 8px;
+    }
+
+    .article-tag {
+      background: rgba(212, 175, 55, 0.07);
+      border: 1px solid rgba(212, 175, 55, 0.3);
+      color: #999;
+      font-size: 0.76rem;
+      padding: 4px 13px;
+      border-radius: 20px;
+      white-space: nowrap;
+      letter-spacing: 0.02em;
+    }
+
     /* 雙圖並排 */
     .image-pair {
       display: grid;
@@ -1130,6 +1149,20 @@
       return html.join('');
     }
 
+    // ===== 全站共用 SEO 關鍵字標籤 =====
+    const globalTags = [
+      '台中包車','南投包車','日月潭包車','清境包車','嘉義包車','高雄包車','台灣環島包車','中部包車',
+      '包車旅遊','一日遊包車','包車推薦','豪華保母車','台灣包車','包車自由行',
+      '長輩旅遊包車','家庭旅遊包車','團體包車','員工旅遊包車','外籍旅客台灣','無障礙旅遊台灣',
+      '日月潭一日遊包車','清境農場包車','阿里山包車','九族文化村包車'
+    ];
+
+    function renderTags() {
+      return '<div class="article-tags">' +
+        globalTags.map(t => '<span class="article-tag">' + t + '</span>').join('') +
+      '</div>';
+    }
+
     // ===== SEO 工具函式 =====
     const _BASE = 'https://leadercarrental.github.io/hesun-V.2/blog/';
     const _origTitle = document.title;
@@ -1221,6 +1254,7 @@
         coverHtml +
         '<div class="article-body">' +
           renderContent(post.content) +
+          renderTags() +
           '<div class="article-cta">' +
             '<h3>準備好開始您的台灣包車之旅了嗎？</h3>' +
             '<p>立即聯絡我們，根據您的興趣規劃專屬行程</p>' +
