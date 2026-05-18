@@ -8,7 +8,7 @@
   <meta name="keywords" content="包車, 台灣包車, 機場接送, 景點包車, 婚禮用車, 商務接送, 賀森包車旅遊" />
   <!-- Google Analytics（中國版不載入）-->
   <script>
-    if (window.location.hostname !== 'leadercarrental779.pages.dev') {
+    if (window.location.hostname !== 'leadercarrental779.pages.dev' && !window.location.hostname.includes('edgeone.dev')) {
       var s = document.createElement('script');
       s.async = true;
       s.src = 'https://www.googletagmanager.com/gtag/js?id=G-S09SJTV4PD';
@@ -418,7 +418,7 @@
 
   <script src="assets/js/main.js"></script>
   <script>
-    if (window.location.hostname === 'leadercarrental779.pages.dev') {
+    if (window.location.hostname === 'leadercarrental779.pages.dev' || window.location.hostname.includes('edgeone.dev')) {
 
       // 聯絡方式換成微信 / 小紅書 / 抖音
       document.getElementById('contact-card-title').textContent = '包车旅游、报价 / 预约咨询';
