@@ -529,8 +529,28 @@
         }
       }
 
-      document.addEventListener('DOMContentLoaded', function() { walkNodes(document.body); });
-      if (document.readyState !== 'loading') walkNodes(document.body);
+      // 把影片換成圖片（影片在中國無法正常播放）
+      function replaceVideosWithImages() {
+        const videoWrappers = document.querySelectorAll('.photo-row-video, .interior-img-video');
+        const replacements = [
+          { src: 'assets/images/fleet-trio.jpg', alt: '賀森豪華保母車車隊' },
+          { src: 'assets/images/fleet-row.jpg',  alt: '賀森豪華保母車車隊陣容' },
+        ];
+        videoWrappers.forEach(function(wrapper, i) {
+          const rep = replacements[i];
+          if (!rep) return;
+          wrapper.innerHTML = '<img src="' + rep.src + '" alt="' + rep.alt + '" style="width:100%;height:100%;object-fit:cover;display:block;" />';
+          wrapper.classList.remove('photo-row-video', 'interior-img-video');
+        });
+      }
+      document.addEventListener('DOMContentLoaded', function() {
+        replaceVideosWithImages();
+        walkNodes(document.body);
+      });
+      if (document.readyState !== 'loading') {
+        replaceVideosWithImages();
+        walkNodes(document.body);
+      }
     }
   </script>
 </body>
