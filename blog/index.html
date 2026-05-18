@@ -1322,6 +1322,52 @@
 
     // 初始化部落格
     renderBlog();
+
+    // 中國版介面轉簡體
+    if (window.location.hostname === 'leadercarrental779.pages.dev') {
+      document.documentElement.lang = 'zh-Hans';
+      document.title = '博客 | 贺森包车旅游';
+      const md = document.querySelector('meta[name="description"]');
+      if (md) md.content = '贺森包车旅游博客 - 台湾旅游攻略、包车心得、景点介绍、旅游故事。';
+
+      const zhMap = [
+        ['賀森部落格','贺森旅游日志'],
+        ['台灣旅遊攻略、包車心得、景點介紹、旅遊故事與經驗分享','台湾旅游攻略、包车心得、景点介绍、旅游故事与经验分享'],
+        ['準備好開始您的台灣包車之旅了嗎？','准备好开始您的台湾包车之旅了吗？'],
+        ['立即聯絡我們，根據您的興趣規劃專屬行程','立即联系我们，根据您的兴趣规划专属行程'],
+        ['立即預約','立即预约'],
+        ['閱讀全文','阅读全文'],
+        ['服務項目','服务项目'],
+        ['豪華車隊','豪华车队'],
+        ['熱門路線','热门路线'],
+        ['部落格','旅游日志'],
+        ['聯絡我們','联系我们'],
+        ['首頁','首页'],
+        ['包車旅遊','包车旅游'],
+        ['貴賓感謝','贵宾感谢'],
+        ['高雄旅遊','高雄旅游'],
+        ['清境住宿','清境住宿'],
+        ['環島包車','环岛包车'],
+        ['嘉義旅遊','嘉义旅游'],
+        ['日月潭旅遊','日月潭旅游'],
+      ];
+
+      function walkNodes(node) {
+        if (node.nodeType === Node.TEXT_NODE) {
+          let t = node.nodeValue;
+          for (const [tc, sc] of zhMap) {
+            if (t.includes(tc)) t = t.split(tc).join(sc);
+          }
+          node.nodeValue = t;
+        } else if (node.nodeType === Node.ELEMENT_NODE &&
+                   node.tagName !== 'SCRIPT' && node.tagName !== 'STYLE') {
+          node.childNodes.forEach(walkNodes);
+        }
+      }
+
+      // 頁面載入後執行，確保動態渲染的文章卡片也套用
+      setTimeout(function() { walkNodes(document.body); }, 50);
+    }
   </script>
 </body>
 </html>

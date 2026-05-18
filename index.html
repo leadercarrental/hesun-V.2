@@ -418,14 +418,14 @@
 
   <script src="assets/js/main.js"></script>
   <script>
-    // 中國版網站（Cloudflare Pages）換成微信 / 小紅書 / 抖音
     if (window.location.hostname === 'leadercarrental779.pages.dev') {
-      document.getElementById('contact-card-title').textContent = '包車旅遊、報價 / 預約諮問';
 
+      // 聯絡方式換成微信 / 小紅書 / 抖音
+      document.getElementById('contact-card-title').textContent = '包车旅游、报价 / 预约咨询';
       document.getElementById('contact-card-btns').innerHTML = `
         <div style="text-align:center; margin-bottom:12px;">
           <img src="assets/images/wechat-qr.jpg" alt="微信 QR Code" style="width:160px; border-radius:8px; border:2px solid #d4af37;" />
-          <p style="margin-top:6px; font-size:0.85rem; color:#d4af37;">微信掃码加好友 · leadercar779</p>
+          <p style="margin-top:6px; font-size:0.85rem; color:#d4af37;">微信扫码加好友 · leadercar779</p>
         </div>
         <a href="https://xhslink.com/m/5Lr7fXtU0WS" target="_blank" rel="noopener" class="card-action-btn">
           📕 小红书
@@ -434,6 +434,103 @@
           🎵 抖音
         </a>
       `;
+
+      // 介面文字轉簡體
+      document.documentElement.lang = 'zh-Hans';
+      document.title = '贺森包车旅游 | Hesun Private Tour & Chauffeur';
+      const md = document.querySelector('meta[name="description"]');
+      if (md) md.content = '贺森包车旅游 - 全台顶级包车服务。机场接送、景点包车、商务接送、婚礼用车。专业司机、豪华车队、五星级服务体验。';
+
+      const zhMap = [
+        ['賀森包車旅遊 — 以 1000+ 服務經驗，為您打造每一段難忘的旅途。','贺森包车旅游 — 以 1000+ 服务经验，为您打造每一段难忘的旅途。'],
+        ['五星級車隊 × 經驗豐富司機 × 量身客製行程','五星级车队 × 经验丰富司机 × 量身定制行程'],
+        ['自由行程客製化，專屬司機伴您遊台灣','自由行程定制化，专属司机陪您游台湾'],
+        ['高規格乘坐環境，專為\n貴賓與高階主管打造','高规格乘坐环境，专为\n贵宾与高层管理人员打造'],
+        ['高端禮遇尊榮登場，為\n新人打造專屬魅力排場','高端礼遇尊荣登场，为\n新人打造专属魅力排场'],
+        ['頂級可調節式航空按摩椅、後排獨立椅及沙發椅兩款、大空間行李放置','顶级可调节式航空按摩椅、后排独立椅及沙发椅两款、大空间行李放置'],
+        ['高級進口影音設備視覺聽覺雙享受','高级进口影音设备视觉听觉双享受'],
+        ['冰飲、保鮮樣樣兼具','冰饮、保鲜样样兼具'],
+        ['隨時聯網不中斷','随时联网不中断'],
+        ['隨插隨充，不再電量焦慮','随插随充，不再电量焦虑'],
+        ['在家能享受的，出門也可擁有','在家能享受的，出门也可拥有'],
+        ['專為長途設計，冷/熱 通風更舒適','专为长途设计，冷/热通风更舒适'],
+        ['歐洲原裝進口設備電動門迎賓踏板','欧洲原装进口设备电动门迎宾踏板'],
+        ['拋棄式拖鞋、迎賓礦泉水、貴賓傘','一次性拖鞋、迎宾矿泉水、贵宾伞'],
+        ['多車齊備，支援同團多車出遊','多车齐备，支持同团多车出游'],
+        ['提供獨立與沙發型椅款，享受自由配','提供独立与沙发型椅款，享受自由搭配'],
+        ['司機嚴格訓練，親切有禮、服務專業','司机严格培训，亲切有礼、服务专业'],
+        ['客製化行程推薦，旅遊規劃不再單調','定制化行程推荐，旅游规划不再单调'],
+        ['為您精選最受歡迎的包車行程,也歡迎告訴我們您的理想路線。','为您精选最受欢迎的包车行程，也欢迎告诉我们您的理想路线。'],
+        ['故宮 → 士林官邸 → 九份老街 → 野柳女王頭','故宫 → 士林官邸 → 九份老街 → 野柳女王头'],
+        ['野柳 → 金山 → 萬里 → 淡水夕陽','野柳 → 金山 → 万里 → 淡水夕阳'],
+        ['幾米廣場 → 礁溪溫泉 → 羅東夜市 → 清水地熱','几米广场 → 礁溪温泉 → 罗东夜市 → 清水地热'],
+        ['日月潭 → 清境農場 → 合歡山 → 埔里酒廠','日月潭 → 清境农场 → 合欢山 → 埔里酒厂'],
+        ['北中南東景點一次玩遍,量身客製專屬路線','北中南东景点一次玩遍，量身定制专属路线'],
+        ['歡迎透過以下方式與我們聯繫，我們將盡快為您服務。','欢迎通过以下方式与我们联系，我们将尽快为您服务。'],
+        ['PREMIUM CHAUFFEUR SERVICE · 全台頂級包車','PREMIUM CHAUFFEUR SERVICE · 全台顶级包车'],
+        ['桃機、松機、清泉崗，','桃园、松山、清泉岗，'],
+        ['準時安全接送','准时安全接送'],
+        ['台灣全區服務','台湾全区服务'],
+        ['24 小時全年無休','24小时全年无休'],
+        ['全台最多同款高規格保母車','全台最多同款高规格豪华保母车'],
+        ['後排座椅樣式自由選擇','后排座椅样式自由选择'],
+        ['提供VIP私人訂製行程','提供VIP私人定制行程'],
+        ['服務項目','服务项目'],
+        ['豪華車隊','豪华车队'],
+        ['熱門路線','热门路线'],
+        ['關於我們','关于我们'],
+        ['部落格','旅游日志'],
+        ['聯絡我們','联系我们'],
+        ['聯絡','联系'],
+        ['首頁','首页'],
+        ['立即預約','立即预约'],
+        ['服務介紹','服务介绍'],
+        ['出遊紀錄','出游记录'],
+        ['服務經驗','服务经验'],
+        ['Google 好評','Google 好评'],
+        ['全年無休','全年无休'],
+        ['包車旅遊','包车旅游'],
+        ['機場接送','机场接送'],
+        ['商務接駁','商务接驳'],
+        ['結婚禮車','结婚礼车'],
+        ['車內設備及特色','车内设备及特色'],
+        ['專屬移動式KTV','专属移动式KTV'],
+        ['前置冰箱','前置冰箱'],
+        ['免費行動Wi-Fi','免费移动Wi-Fi'],
+        ['40吋4K智慧型電視','40吋4K智慧型电视'],
+        ['頂級航空按摩椅','顶级航空按摩椅'],
+        ['電動迎賓踏板','电动迎宾踏板'],
+        ['貴賓級禮遇','贵宾级礼遇'],
+        ['為什麼選擇我們？','为什么选择我们？'],
+        ['專業司機團隊','专业司机团队'],
+        ['熱門包車路線','热门包车路线'],
+        ['台北一日經典','台北一日经典'],
+        ['北海岸風情','北海岸风情'],
+        ['宜蘭綠意線','宜兰绿意线'],
+        ['中台灣深度','中台湾深度'],
+        ['花東縱谷','花东纵谷'],
+        ['環島五日遊','环岛五日游'],
+        ['公司資訊','公司信息'],
+        ['專屬尊榮','专属尊荣'],
+        ['奢華旅程體驗','奢华旅程体验'],
+        ['USB / Type-C / 110v 充電孔','USB / Type-C / 110v 充电孔'],
+      ];
+
+      function walkNodes(node) {
+        if (node.nodeType === Node.TEXT_NODE) {
+          let t = node.nodeValue;
+          for (const [tc, sc] of zhMap) {
+            if (t.includes(tc)) t = t.split(tc).join(sc);
+          }
+          node.nodeValue = t;
+        } else if (node.nodeType === Node.ELEMENT_NODE &&
+                   node.tagName !== 'SCRIPT' && node.tagName !== 'STYLE') {
+          node.childNodes.forEach(walkNodes);
+        }
+      }
+
+      document.addEventListener('DOMContentLoaded', function() { walkNodes(document.body); });
+      if (document.readyState !== 'loading') walkNodes(document.body);
     }
   </script>
 </body>
