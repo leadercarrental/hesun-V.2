@@ -13,18 +13,21 @@
   <meta property="og:url" content="https://leadercarrental.github.io/hesun-V.2/blog/" />
   <meta property="og:image" content="https://leadercarrental.github.io/hesun-V.2/blog/images/sun-moon-lake/S__478224393_0.jpg" />
   <link rel="canonical" id="canonical-link" href="https://leadercarrental.github.io/hesun-V.2/blog/" />
-  <!-- Google tag (gtag.js) -->
-  <script async src="https://www.googletagmanager.com/gtag/js?id=G-S09SJTV4PD"></script>
+  <!-- Google Analytics（中國版不載入）-->
   <script>
-    window.dataLayer = window.dataLayer || [];
-    function gtag(){dataLayer.push(arguments);}
-    gtag('js', new Date());
-    gtag('config', 'G-S09SJTV4PD');
+    if (window.location.hostname !== 'leadercarrental779.pages.dev') {
+      var s = document.createElement('script');
+      s.async = true;
+      s.src = 'https://www.googletagmanager.com/gtag/js?id=G-S09SJTV4PD';
+      document.head.appendChild(s);
+      window.dataLayer = window.dataLayer || [];
+      function gtag(){dataLayer.push(arguments);}
+      gtag('js', new Date());
+      gtag('config', 'G-S09SJTV4PD');
+    }
   </script>
 
-  <link rel="preconnect" href="https://fonts.googleapis.com">
-  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@400;500;600;700&family=Noto+Serif+TC:wght@300;400;500;600;700;900&family=Noto+Sans+TC:wght@300;400;500;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="../assets/css/fonts.css" />
 
   <link rel="stylesheet" href="../assets/css/styles.css?v=10" />
   <style>
@@ -1029,17 +1032,21 @@
         // 略過空行
         if (!line) { i++; continue; }
 
-        // [YOUTUBE:id] YouTube 嵌入
+        // [YOUTUBE:id] YouTube 嵌入（中國版顯示提示）
         if (line.startsWith('[YOUTUBE:')) {
           const m = line.match(/\[YOUTUBE:([^\]]+)\]/);
           if (m) {
-            html.push(
-              '<div class="youtube-shorts-wrap">' +
-                '<iframe src="https://www.youtube.com/embed/' + m[1].trim() + '?rel=0" ' +
-                'allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" ' +
-                'allowfullscreen loading="lazy"></iframe>' +
-              '</div>'
-            );
+            if (window.location.hostname === 'leadercarrental779.pages.dev') {
+              html.push('<p style="text-align:center;color:#999;font-size:0.9rem;padding:16px 0;">📱 影片請至抖音搜尋「賀森包車」觀看</p>');
+            } else {
+              html.push(
+                '<div class="youtube-shorts-wrap">' +
+                  '<iframe src="https://www.youtube.com/embed/' + m[1].trim() + '?rel=0" ' +
+                  'allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" ' +
+                  'allowfullscreen loading="lazy"></iframe>' +
+                '</div>'
+              );
+            }
           }
           i++; continue;
         }
